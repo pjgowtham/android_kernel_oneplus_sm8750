@@ -47,6 +47,9 @@ append_cmd POST_DEFCONFIG_CMDS 'sanity_check_abi'
 function build_defconfig_fragments() {
 	if [[ "${VARIANT}" =~ ^(perf|consolidate)$ ]]; then
 		apply_defconfig_fragment ${KERNEL_DIR}/arch/${ARCH}/configs/vendor/${MSM_ARCH}_perf.config vendor/${MSM_ARCH}-perf_defconfig
+		if [ "${MSM_ARCH}" = waipio ]; then
+			apply_defconfig_fragment ${KERNEL_DIR}/arch/${ARCH}/configs/vendor/oplus/waipio_perf.config vendor/oplus/waipio-perf_defconfig
+		fi
 		if [ "${VARIANT}" = perf ]; then
 			return
 		fi
