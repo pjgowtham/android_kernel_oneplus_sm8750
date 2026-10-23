@@ -253,23 +253,52 @@ def define_waipio():
         "sound/usb/snd-usb-audio-qmi.ko",
     ]
 
+    _waipio_consolidate_in_tree_modules = _waipio_in_tree_modules + [
+        # keep sorted
+        "drivers/hwtracing/coresight/coresight-etm4x.ko",
+        "drivers/misc/lkdtm/lkdtm.ko",
+        "kernel/locking/locktorture.ko",
+        "kernel/rcu/rcutorture.ko",
+        "kernel/sched/walt/sched-walt-debug.ko",
+        "kernel/torture.ko",
+        "lib/atomic64_test.ko",
+        "lib/test_user_copy.ko",
+    ]
+
     kernel_vendor_cmdline_extras = ["bootconfig"]
 
-    board_kernel_cmdline_extras = []
-    board_bootconfig_extras = []
+    for variant in la_variants:
+        board_kernel_cmdline_extras = []
+        board_bootconfig_extras = []
 
-    mod_list = _waipio_in_tree_modules
-    board_kernel_cmdline_extras += ["nosoftlockup console=ttynull qcom_geni_serial.con_enabled=0"]
-    kernel_vendor_cmdline_extras += ["nosoftlockup console=ttynull qcom_geni_serial.con_enabled=0"]
-    board_bootconfig_extras += ["androidboot.serialconsole=0"]
+        if variant == "consolidate":
+            mod_list = _waipio_consolidate_in_tree_modules
+            board_bootconfig_extras += ["androidboot.serialconsole=1"]
+            board_kernel_cmdline_extras += [
+                # do not sort
+                "console=ttyMSM0,115200n8",
+                "qcom_geni_serial.con_enabled=1",
+                "earlycon",
+            ]
+            kernel_vendor_cmdline_extras += [
+                # do not sort
+                "console=ttyMSM0,115200n8",
+                "qcom_geni_serial.con_enabled=1",
+                "earlycon",
+            ]
+        else:
+            mod_list = _waipio_in_tree_modules
+            board_kernel_cmdline_extras += ["nosoftlockup console=ttynull qcom_geni_serial.con_enabled=0"]
+            kernel_vendor_cmdline_extras += ["nosoftlockup console=ttynull qcom_geni_serial.con_enabled=0"]
+            board_bootconfig_extras += ["androidboot.serialconsole=0"]
 
-    define_msm_la(
-        msm_target = target_name,
-        variant = "perf",
-        in_tree_module_list = mod_list,
-        boot_image_opts = boot_image_opts(
-            kernel_vendor_cmdline_extras = kernel_vendor_cmdline_extras,
-            board_kernel_cmdline_extras = board_kernel_cmdline_extras,
-            board_bootconfig_extras = board_bootconfig_extras,
-        ),
-    )
+        define_msm_la(
+            msm_target = target_name,
+            variant = variant,
+            in_tree_module_list = mod_list,
+            boot_image_opts = boot_image_opts(
+                kernel_vendor_cmdline_extras = kernel_vendor_cmdline_extras,
+                board_kernel_cmdline_extras = board_kernel_cmdline_extras,
+                board_bootconfig_extras = board_bootconfig_extras,
+            ),
+        )
