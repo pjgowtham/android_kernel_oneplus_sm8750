@@ -49,6 +49,7 @@ function build_defconfig_fragments() {
 		apply_defconfig_fragment ${KERNEL_DIR}/arch/${ARCH}/configs/vendor/${MSM_ARCH}_perf.config vendor/${MSM_ARCH}-perf_defconfig
 		if [ "${MSM_ARCH}" = waipio ]; then
 			apply_defconfig_fragment ${KERNEL_DIR}/arch/${ARCH}/configs/vendor/oplus/waipio_perf.config vendor/oplus/waipio-perf_defconfig
+			apply_defconfig_fragment ${KERNEL_DIR}/arch/${ARCH}/configs/vendor/oplus/ferrari.config vendor/oplus/ferrari_defconfig
 		fi
 		if [ "${VARIANT}" = perf ]; then
 			return

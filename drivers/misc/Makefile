@@ -74,3 +74,7 @@ obj-$(CONFIG_HAPTIC_FEEDBACK) += vibrator/haptic_feedback/
 obj-$(CONFIG_OPLUS_HAPTIC_COMMON) += vibrator/oplus_haptic/
 #endif
 obj-$(CONFIG_PKVM_SMC_FILTER)  += pkvm-smc/
+
+obj-$(CONFIG_NXP_NFC_I2C) += nxp_nfc/
+
+obj-$(CONFIG_OPLUS_RF_CABLE_MONITOR) += oplus_rf_cable/

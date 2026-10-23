@@ -523,3 +523,9 @@ config LOONGSON2_THERMAL
 	  temperature threshold, the interrupt will occur.
 
 endif
+
+config OPLUS_THERMAL_WAIPIO
+	tristate "Oplus WAIPIO thermal services"
+	depends on ARCH_WAIPIO
+	help
+	  Provide shell temperature reporting, PA ADC sensors and IPA thermal control.

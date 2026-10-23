@@ -1402,3 +1402,8 @@ config TOUCHSCREEN_HIMAX_HX83112B
 source "drivers/input/touchscreen/oplus_notify/Kconfig"
 
 endif
+
+if ARCH_WAIPIO
+source "drivers/input/touchscreen/oplus_touchscreen_v2/Kconfig"
+source "drivers/input/touchscreen/touch_custom/Kconfig"
+endif

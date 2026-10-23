@@ -609,3 +609,11 @@ source "drivers/misc/vibrator/haptic_feedback/Kconfig"
 source "drivers/misc/vibrator/oplus_haptic/Kconfig"
 #endif
 endmenu
+
+source "drivers/misc/nxp_nfc/Kconfig"
+
+config OPLUS_RF_CABLE_MONITOR
+	tristate "Oplus GPIO RF cable monitor"
+	depends on ARCH_WAIPIO && GPIOLIB
+	help
+	  Monitor the RF cable GPIOs described by the Oplus board devicetree.

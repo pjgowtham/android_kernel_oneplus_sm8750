@@ -67,3 +67,5 @@ obj-y += oplus/dft/
 #ifdef OPLUS_FEATURE_FPGA
 obj-$(CONFIG_OPLUS_FPGA_NOTIFY)     += oplus/fpga_notify/
 #endif /* OPLUS_FEATURE_DFT */
+
+obj-$(CONFIG_OPLUS_FEATURE_SENSOR_CFG) += oplus/sensor/

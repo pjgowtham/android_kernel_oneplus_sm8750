@@ -65,3 +65,7 @@ source "drivers/soc/oplus/fpga_notify/Kconfig"
 #endif /* OPLUS_FEATURE_FPGA *
 
 endmenu
+
+if ARCH_WAIPIO
+source "drivers/soc/oplus/sensor/Kconfig"
+endif

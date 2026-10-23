@@ -216,3 +216,7 @@ endmenu
 
 endmenu
 
+
+if ARCH_WAIPIO
+source "drivers/input/oplus_fp_driver/Kconfig"
+endif
